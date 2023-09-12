@@ -9,6 +9,7 @@ public class MainWindow extends JFrame {
     private JButton submitGuessButton;
     private JPanel mainPanel;
     private JTextField textField1;
+    private JLabel inputLabel;
 
     public MainWindow() {
         setContentPane(mainPanel);
@@ -22,12 +23,31 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String results = "Your guess is ";
-                if(textField1.getText().equals("3")){
-                    results+="correct";
+                if(hardModeCheckBox.isSelected()) {
+                    if (textField1.getText().equals("8")) {
+                        results += "correct";
+                    } else {
+                        results += "incorrect";
+                    }
+
                 } else {
-                    results+="incorrect";
+                    if (textField1.getText().equals("3")) {
+                        results += "correct";
+                    } else {
+                        results += "incorrect";
+                    }
                 }
                 JOptionPane.showMessageDialog(MainWindow.this, results);
+            }
+        });
+        hardModeCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(hardModeCheckBox.isSelected()) {
+                    inputLabel.setText("Input a number 1 - 10");
+                } else {
+                    inputLabel.setText("Input a number 1 - 5");
+                }
             }
         });
     }
